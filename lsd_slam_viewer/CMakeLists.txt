@@ -14,6 +14,7 @@ ADD_SUBDIRECTORY(${PROJECT_SOURCE_DIR}/thirdparty/Sophus)
 set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${PROJECT_SOURCE_DIR}/cmake)
 
 find_package(catkin REQUIRED COMPONENTS
+  cmake_modules
   cv_bridge
   dynamic_reconfigure
   sensor_msgs
@@ -27,7 +28,11 @@ find_package(OpenGL REQUIRED)
 set(QT_USE_QTOPENGL TRUE)
 set(QT_USE_QTXML TRUE)
 find_package(QGLViewer REQUIRED)
+
 find_package(Eigen REQUIRED)
+include_directories(${EIGEN_INCLUDE_DIRS})
+add_definitions(${EIGEN_DEFINITIONS})
+
 find_package(OpenCV REQUIRED)
 find_package(Boost REQUIRED COMPONENTS thread)
 

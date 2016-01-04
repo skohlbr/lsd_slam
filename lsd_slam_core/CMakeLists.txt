@@ -10,6 +10,7 @@ project(lsd_slam_core)
 set(CMAKE_BUILD_TYPE Release)
 
 find_package(catkin REQUIRED COMPONENTS
+  cmake_modules
   cv_bridge
   dynamic_reconfigure
   sensor_msgs
@@ -19,6 +20,9 @@ find_package(catkin REQUIRED COMPONENTS
 )
 
 find_package(Eigen REQUIRED)
+include_directories(${EIGEN_INCLUDE_DIRS})
+add_definitions(${EIGEN_DEFINITIONS})
+
 find_package(X11 REQUIRED)
 include(cmake/FindG2O.cmake)
 include(cmake/FindSuiteParse.cmake)
@@ -97,7 +101,7 @@ include_directories(
 
 # build shared library.
 add_library(lsdslam SHARED ${SOURCE_FILES})
-target_link_libraries(lsdslam ${FABMAP_LIB} ${G2O_LIBRARIES} ${catkin_LIBRARIES} csparse cxsparse )
+target_link_libraries(lsdslam ${FABMAP_LIB} ${G2O_LIBRARIES} ${catkin_LIBRARIES} csparse cxsparse X11)
 #rosbuild_link_boost(lsdslam thread)
 
 
